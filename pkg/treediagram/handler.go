@@ -36,10 +36,6 @@ func (h Handler) Sentiment(request contract.Request) (*contract.Response, error)
 		return nil, fmt.Errorf("machinebox: %s", err.Error())
 	}
 
-	if !shouldReact(request) {
-		return nil, nil
-	}
-
 	reaction := FormatSentimentReaction(request, analysis)
 	if reaction == nil {
 		return nil, nil
@@ -78,26 +74,4 @@ func (h Handler) makeLoggingHttpHandlerFunc(name string, f func(contract.Request
 
 		contractHandlerFunc.ServeHTTP(w, r)
 	}
-}
-
-func shouldReact(request contract.Request) bool {
-	if strings.Contains(strings.ToLower(request.Content), "treediagram") {
-		return true
-	}
-
-	if isBotMentioned(request) {
-		return true
-	}
-
-	return false
-}
-
-func isBotMentioned(request contract.Request) bool {
-	for _, mention := range request.Mentions {
-		if mention.Id == request.Bot.Id {
-			return true
-		}
-	}
-
-	return false
 }
