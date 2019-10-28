@@ -9,5 +9,5 @@ RUN echo "sentiment:x:100:101:/" > passwd
 FROM scratch
 COPY --from=build /go/src/github.com/jukeizu/sentiment/passwd /etc/passwd
 COPY --from=build --chown=100:101 /go/src/github.com/jukeizu/sentiment/bin/sentiment .
-USER nobody
+USER sentiment
 ENTRYPOINT ["./sentiment"]
