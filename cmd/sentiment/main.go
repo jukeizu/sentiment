@@ -27,7 +27,7 @@ var (
 
 func parseConfig() {
 	flag.StringVar(&httpPort, "http.port", httpPort, "http port for handler")
-	flag.StringVar(&flagTextBoxAddress, "textbox.address", flagTextBoxAddress, "textbox address")
+	flag.StringVar(&flagTextBoxAddress, "textbox.addr", flagTextBoxAddress, "textbox address")
 	flag.BoolVar(&flagVersion, "v", false, "version")
 
 	flag.Parse()
